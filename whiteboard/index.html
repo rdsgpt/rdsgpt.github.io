@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DrRcraft Whiteboard</title>
+        <link rel="stylesheet" href="../style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="lib/style.css" />
+        <link rel="icon" href="../style/logo-small.svg" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="logo" href="../">Code Editor</a>
+                <div class="navlinks">
+                    <a href="../about/">About</a>
+                    <a href="../help/">Help</a>
+                    <a href="../create/">Create</a>
+                    <a href="../programs/">Programs</a>
+                    <a href="../preferences/">Preferences</a>
+                    <a href="../2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <h1>Whiteboard</h1>
+            <p><strong style="color: #f50;">Note:</strong> This whiteboard is currently in a testing phase. Some features may be missing, or completely not working.<br/>The whiteboard used here is <a href="https://github.com/excalidraw/excalidraw">Excalidraw</a>.</p>
+            <div id="surface">
+                <div id="workspace"></div>
+            </div>
+        </article>
+        <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@excalidraw/excalidraw/dist/excalidraw.production.min.js"></script>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

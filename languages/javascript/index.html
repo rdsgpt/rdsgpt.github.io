@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DrRcraft JavaScript Editor</title>
+        <link rel="stylesheet" href="../../style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="../../style/logo-small.svg" />
+    </head>
+    <body>
+        <header style="filter: blur(8px);">
+            <nav>
+                <a class="logo" href="../../">Code Editor</a>
+                <div class="navlinks">
+                    <a href="../../about/">About</a>
+                    <a href="../../help/">Help</a>
+                    <a href="../../create/">Create</a>
+                    <a href="../../programs/">Programs</a>
+                    <a href="../../preferences/">Preferences</a>
+                    <a href="../../2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <article style="filter: blur(8px);">
+            <select id="examples" aria-title="List of examples" style="display: none;">
+                <option>Select example...</option>
+            </select>
+            <div id="surface">
+                <div id="editor"></div>
+                <div id="output" style="display: none;"></div>
+                <div id="log" style="display: none;"></div>
+                <div id="dock">
+                    <button id="run" title="Run code (Ctrl-Enter)" aria-title="Run code (Ctrl-Enter)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5929 10.9105C21.4425 11.3884 21.4425 12.6116 20.5929 13.0895L6.11279 21.2345C5.27954 21.7033 4.24997 21.1011 4.24997 20.1451L4.24997 3.85492C4.24997 2.89889 5.27954 2.29675 6.11279 2.76545L20.5929 10.9105Z"></path>
+                        </svg>
+                        &nbsp; Run
+                    </button>
+                    <h2 style="margin-top: 0.9375rem;" id="tabs-title">Tabs</h2>
+                    <button id="tab-editor" title="Show editor" aria-title="Show editor" class="active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path d="M3 3.5H21V5.5H3V3.5Z"></path>
+                            <path d="M3 8.5H14V10.5H3V8.5Z"></path>
+                            <path d="M3 13.5H21V15.5H3V13.5Z"></path>
+                            <path d="M3 18.5H17V20.5H3V18.5Z"></path>
+                        </svg>
+                        &nbsp; Code
+                    </button>
+                    <button id="tab-output" title="Show output" aria-title="Show output">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 3.75C3.30964 3.75 2.75 4.30964 2.75 5V15C2.75 15.6904 3.30964 16.25 4 16.25H20C20.6904 16.25 21.25 15.6904 21.25 15V5C21.25 4.30964 20.6904 3.75 20 3.75H4ZM12.75 17.75H20C21.5188 17.75 22.75 16.5188 22.75 15V5C22.75 3.48122 21.5188 2.25 20 2.25H4C2.48122 2.25 1.25 3.48122 1.25 5V15C1.25 16.5188 2.48122 17.75 4 17.75H11.25V20.25H8C7.58579 20.25 7.25 20.5858 7.25 21C7.25 21.4142 7.58579 21.75 8 21.75H16C16.4142 21.75 16.75 21.4142 16.75 21C16.75 20.5858 16.4142 20.25 16 20.25H12.75V17.75Z"></path>
+                        </svg>
+                        &nbsp; Webview
+                    </button>
+                    <button id="tab-log" title="Show log" aria-title="Show log">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.46967 4.46967C3.76256 4.17678 4.23744 4.17678 4.53033 4.46967L10.5303 10.4697C10.8232 10.7626 10.8232 11.2374 10.5303 11.5303L4.53033 17.5303C4.23744 17.8232 3.76256 17.8232 3.46967 17.5303C3.17678 17.2374 3.17678 16.7626 3.46967 16.4697L8.93934 11L3.46967 5.53033C3.17678 5.23744 3.17678 4.76256 3.46967 4.46967ZM11.25 19C11.25 18.5858 11.5858 18.25 12 18.25H20C20.4142 18.25 20.75 18.5858 20.75 19C20.75 19.4142 20.4142 19.75 20 19.75H12C11.5858 19.75 11.25 19.4142 11.25 19Z"></path>
+                        </svg>
+                        &nbsp; Logs
+                    </button>
+                    <h2 style="margin-top: 0.9375rem;">Tools</h2>
+                    <button id="release" aria-title="Release your code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.4086 9.75C14.3705 10.1844 14.3078 10.6148 14.2213 11.0393L15.4623 12.2804C15.695 11.458 15.847 10.6106 15.9137 9.75H19.2117C19.0413 11.4075 18.3126 12.8995 17.2167 14.0347L18.2775 15.0955C19.8078 13.5199 20.75 11.37 20.75 9C20.75 4.16751 16.8325 0.25 12 0.25C7.16751 0.25 3.25 4.16751 3.25 9C3.25 11.37 4.19222 13.5199 5.72249 15.0955L6.78329 14.0347C5.68741 12.8995 4.95867 11.4075 4.78832 9.75H8.08626C8.15302 10.6106 8.30505 11.458 8.53766 12.2804L9.7787 11.0393C9.6922 10.6148 9.62949 10.1844 9.59136 9.75H14.4086ZM4.78832 8.25H8.08626C8.26173 5.98792 9.02629 3.81748 10.2947 1.95168C7.34929 2.66175 5.10485 5.17015 4.78832 8.25ZM12 2.15939C10.6237 3.91218 9.78633 6.02873 9.59136 8.25H14.4086C14.2137 6.02873 13.3763 3.91218 12 2.15939ZM19.2117 8.25H15.9137C15.7383 5.98792 14.9737 3.81747 13.7052 1.95168C16.6507 2.66175 18.8951 5.17015 19.2117 8.25Z"></path>
+                            <path d="M17.5303 16.4697L12.5303 11.4697C12.2374 11.1768 11.7626 11.1768 11.4697 11.4697L6.46967 16.4697C6.17678 16.7626 6.17678 17.2374 6.46967 17.5303C6.76256 17.8232 7.23744 17.8232 7.53033 17.5303L11.25 13.8107V23C11.25 23.4142 11.5858 23.75 12 23.75C12.4142 23.75 12.75 23.4142 12.75 23V13.8107L16.4697 17.5303C16.7626 17.8232 17.2374 17.8232 17.5303 17.5303C17.8232 17.2374 17.8232 16.7626 17.5303 16.4697Z"></path>
+                        </svg>
+                        &nbsp; Release
+                    </button>
+                    <button id="save" aria-title="Save code to programs">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.49476 4.72892C7.89813 4.22874 9.41791 4.11782 10.8824 4.40805C12.347 4.69829 13.701 5.37881 14.7893 6.37582C15.7328 7.24012 16.444 8.31256 16.8628 9.5H17.4558C18.8509 9.5 20.1944 10.0333 21.1892 10.9911C22.185 11.9499 22.75 13.2564 22.75 14.625C22.75 15.9936 22.185 17.3001 21.1892 18.2589C20.1944 19.2167 18.8509 19.75 17.4558 19.75H9.27672C7.78211 19.7511 6.31531 19.3486 5.04274 18.5859C3.76996 17.8231 2.74092 16.7294 2.07617 15.426C1.41126 14.1222 1.13864 12.6629 1.29128 11.2147C1.44392 9.76655 2.01518 8.39159 2.93654 7.24553C3.85767 6.09976 5.09124 5.22916 6.49476 4.72892ZM10.5908 5.87943C9.39098 5.64166 8.146 5.73283 6.99835 6.14186C5.85085 6.55084 4.84944 7.26013 4.10559 8.18538C3.36197 9.11035 2.90501 10.2145 2.78302 11.3719C2.66104 12.5292 2.87841 13.6974 3.41242 14.7445C3.94659 15.7919 4.77733 16.6781 5.81386 17.2993C6.8506 17.9207 8.05004 18.2509 9.27564 18.25H17.4558C18.4711 18.25 19.4393 17.8614 20.1489 17.1783C20.8574 16.4961 21.25 15.577 21.25 14.625C21.25 13.673 20.8574 12.7539 20.1489 12.0717C19.4393 11.3886 18.4711 11 17.4558 11H16.3106C15.9712 11 15.6741 10.7721 15.5862 10.4443C15.2839 9.31687 14.6581 8.28993 13.7761 7.48187C12.8937 6.67359 11.7906 6.11719 10.5908 5.87943Z"></path>
+                        </svg>
+                        &nbsp; Save
+                    </button>
+                    <button id="history" aria-title="View code history">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6402 2.35444C12.7334 2.05993 14.8657 2.45369 16.7157 3.47639C18.5657 4.49909 20.0332 6.09533 20.8971 8.02459C21.761 9.95385 21.9746 12.1116 21.5055 14.1728C21.0365 16.234 19.9103 18.0869 18.2966 19.4523C16.6829 20.8178 14.6692 21.6218 12.5588 21.7432C10.4484 21.8647 8.35576 21.297 6.59608 20.1257C4.8364 18.9544 3.50505 17.243 2.80262 15.2492C2.66498 14.8586 2.8701 14.4303 3.26078 14.2926C3.65145 14.155 4.07974 14.3601 4.21738 14.7508C4.81174 16.4378 5.93827 17.886 7.42723 18.8771C8.91619 19.8681 10.6869 20.3485 12.4726 20.2457C14.2583 20.1429 15.9622 19.4626 17.3277 18.3072C18.6931 17.1519 19.646 15.584 20.0429 13.84C20.4398 12.0959 20.2591 10.2701 19.5281 8.63763C18.7971 7.00518 17.5554 5.65452 15.99 4.78916C14.4246 3.9238 12.6204 3.59061 10.8492 3.83981C9.07796 4.08901 7.43572 4.90709 6.16988 6.17079C6.16453 6.17613 6.15909 6.1814 6.15358 6.18658L2.89341 9.25001H7C7.41421 9.25001 7.75 9.5858 7.75 10C7.75 10.4142 7.41421 10.75 7 10.75H1C0.585786 10.75 0.25 10.4142 0.25 10V4.00001C0.25 3.5858 0.585786 3.25001 1 3.25001C1.41421 3.25001 1.75 3.5858 1.75 4.00001V8.26611L5.11831 5.10107C6.61319 3.61225 8.55076 2.64841 10.6402 2.35444ZM12 6.25001C12.4142 6.25001 12.75 6.5858 12.75 7.00001V11.932L16.416 14.376C16.7607 14.6057 16.8538 15.0714 16.624 15.416C16.3943 15.7607 15.9286 15.8538 15.584 15.624L11.584 12.9574C11.3753 12.8183 11.25 12.5841 11.25 12.3333V7.00001C11.25 6.5858 11.5858 6.25001 12 6.25001Z"></path>
+                        </svg>
+                        &nbsp; History
+                    </button>
+                    <button id="database" aria-title="Start using the DrRcraft Database">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -0.1875rem;">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.17149 4.42132C3.80155 4.71287 3.75 4.91409 3.75 5C3.75 5.08591 3.80155 5.28713 4.17149 5.57868C4.53298 5.86356 5.10255 6.15292 5.87321 6.40981C7.4067 6.92097 9.5729 7.25 12 7.25C14.4271 7.25 16.5933 6.92097 18.1268 6.40981C18.8975 6.15292 19.467 5.86356 19.8285 5.57868C20.1985 5.28713 20.25 5.08591 20.25 5C20.25 4.91409 20.1985 4.71287 19.8285 4.42132C19.467 4.13644 18.8975 3.84708 18.1268 3.59019C16.5933 3.07903 14.4271 2.75 12 2.75C9.5729 2.75 7.4067 3.07903 5.87321 3.59019C5.10255 3.84708 4.53298 4.13644 4.17149 4.42132ZM20.25 7.10311C19.7794 7.38436 19.2186 7.627 18.6011 7.83283C16.8773 8.40746 14.5435 8.75 12 8.75C9.45654 8.75 7.12274 8.40746 5.39887 7.83283C4.78138 7.627 4.22063 7.38436 3.75 7.10311V12C3.75 12.0892 3.8026 12.291 4.16892 12.5812C4.52775 12.8656 5.09403 13.1545 5.8625 13.4111C7.39168 13.9216 9.55757 14.25 12 14.25C14.4424 14.25 16.6083 13.9216 18.1375 13.4111C18.906 13.1545 19.4722 12.8656 19.8311 12.5812C20.1974 12.291 20.25 12.0892 20.25 12V7.10311ZM21.75 5C21.75 4.25749 21.2979 3.66949 20.757 3.24321C20.2076 2.81026 19.4591 2.45317 18.6011 2.16717C16.8773 1.59254 14.5435 1.25 12 1.25C9.45654 1.25 7.12274 1.59254 5.39887 2.16717C4.54085 2.45317 3.79239 2.81026 3.24303 3.24321C2.70213 3.66949 2.25 4.25749 2.25 5V19C2.25 19.7408 2.6974 20.329 3.23733 20.7569C3.78475 21.1907 4.53097 21.548 5.3875 21.8339C7.10832 22.4084 9.44243 22.75 12 22.75C14.5576 22.75 16.8917 22.4084 18.6125 21.8339C19.469 21.548 20.2153 21.1907 20.7627 20.7569C21.3026 20.329 21.75 19.7408 21.75 19V5ZM20.25 14.1082C19.7823 14.3879 19.2257 14.6292 18.6125 14.8339C16.8917 15.4084 14.5576 15.75 12 15.75C9.44243 15.75 7.10832 15.4084 5.3875 14.8339C4.77431 14.6292 4.21765 14.3879 3.75 14.1082V19C3.75 19.0892 3.8026 19.291 4.16892 19.5812C4.52775 19.8656 5.09403 20.1545 5.8625 20.4111C7.39168 20.9216 9.55757 21.25 12 21.25C14.4424 21.25 16.6083 20.9216 18.1375 20.4111C18.906 20.1545 19.4722 19.8656 19.8311 19.5812C20.1974 19.291 20.25 19.0892 20.25 19V14.1082Z"></path>
+                        </svg>
+                        &nbsp; Database
+                    </button>
+                </div>
+            </div>
+        </article>
+        <div id="editor-ctx-menu">
+            <button id="ctx-menu-btn-run" data-drrcraft-shortcut="Ctrl Enter">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"></path>
+                </svg>
+                &nbsp; Run
+            </button>
+            <button id="ctx-menu-btn-run-fullscreen" class="ctx-menu-sep">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"></path>
+                </svg>
+                &nbsp; Run in Fullscreen
+            </button>
+            <button id="ctx-menu-btn-history" class="ctx-menu-sep">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6402 2.35444C12.7334 2.05993 14.8657 2.45369 16.7157 3.47639C18.5657 4.49909 20.0332 6.09533 20.8971 8.02459C21.761 9.95385 21.9746 12.1116 21.5055 14.1728C21.0365 16.234 19.9103 18.0869 18.2966 19.4523C16.6829 20.8178 14.6692 21.6218 12.5588 21.7432C10.4484 21.8647 8.35576 21.297 6.59608 20.1257C4.8364 18.9544 3.50505 17.243 2.80262 15.2492C2.66498 14.8586 2.8701 14.4303 3.26078 14.2926C3.65145 14.155 4.07974 14.3601 4.21738 14.7508C4.81174 16.4378 5.93827 17.886 7.42723 18.8771C8.91619 19.8681 10.6869 20.3485 12.4726 20.2457C14.2583 20.1429 15.9622 19.4626 17.3277 18.3072C18.6931 17.1519 19.646 15.584 20.0429 13.84C20.4398 12.0959 20.2591 10.2701 19.5281 8.63763C18.7971 7.00518 17.5554 5.65452 15.99 4.78916C14.4246 3.9238 12.6204 3.59061 10.8492 3.83981C9.07796 4.08901 7.43572 4.90709 6.16988 6.17079C6.16453 6.17613 6.15909 6.1814 6.15358 6.18658L2.89341 9.25001H7C7.41421 9.25001 7.75 9.5858 7.75 10C7.75 10.4142 7.41421 10.75 7 10.75H1C0.585786 10.75 0.25 10.4142 0.25 10V4.00001C0.25 3.5858 0.585786 3.25001 1 3.25001C1.41421 3.25001 1.75 3.5858 1.75 4.00001V8.26611L5.11831 5.10107C6.61319 3.61225 8.55076 2.64841 10.6402 2.35444ZM12 6.25001C12.4142 6.25001 12.75 6.5858 12.75 7.00001V11.932L16.416 14.376C16.7607 14.6057 16.8538 15.0714 16.624 15.416C16.3943 15.7607 15.9286 15.8538 15.584 15.624L11.584 12.9574C11.3753 12.8183 11.25 12.5841 11.25 12.3333V7.00001C11.25 6.5858 11.5858 6.25001 12 6.25001Z"></path>
+                </svg>
+                &nbsp; History
+            </button>
+            <button id="ctx-menu-btn-cut" data-drrcraft-shortcut="Ctrl X">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.61413 1.35687C5.96931 1.14376 6.43001 1.25893 6.64312 1.61412L15.5157 16.4017C15.8262 16.3032 16.1569 16.25 16.5 16.25C18.2949 16.25 19.75 17.7051 19.75 19.5C19.75 21.2949 18.2949 22.75 16.5 22.75C14.7051 22.75 13.25 21.2949 13.25 19.5C13.25 18.5884 13.6253 17.7644 14.2299 17.1742L5.35688 2.38586C5.14377 2.03068 5.25894 1.56998 5.61413 1.35687ZM18.3859 1.35687C18.7411 1.56998 18.8562 2.03068 18.6431 2.38586L14.4431 9.38586C14.23 9.74105 13.7693 9.85622 13.4141 9.64311C13.0589 9.43 12.9438 8.96931 13.1569 8.61412L17.3569 1.61412C17.57 1.25893 18.0307 1.14376 18.3859 1.35687ZM10.8859 13.8569C11.2411 14.07 11.3562 14.5307 11.1431 14.8859L9.7701 17.1742C10.3747 17.7644 10.75 18.5884 10.75 19.5C10.75 21.2949 9.29493 22.75 7.5 22.75C5.70507 22.75 4.25 21.2949 4.25 19.5C4.25 17.7051 5.70507 16.25 7.5 16.25C7.84312 16.25 8.17383 16.3032 8.48432 16.4017L9.85688 14.1141C10.07 13.7589 10.5307 13.6438 10.8859 13.8569ZM7.5 17.75C6.5335 17.75 5.75 18.5335 5.75 19.5C5.75 20.4665 6.5335 21.25 7.5 21.25C8.4665 21.25 9.25 20.4665 9.25 19.5C9.25 18.5335 8.4665 17.75 7.5 17.75ZM16.5 17.75C15.5335 17.75 14.75 18.5335 14.75 19.5C14.75 20.4665 15.5335 21.25 16.5 21.25C17.4665 21.25 18.25 20.4665 18.25 19.5C18.25 18.5335 17.4665 17.75 16.5 17.75Z"></path>
+                </svg>
+                &nbsp; Cut
+            </button>
+            <button id="ctx-menu-btn-copy" data-drrcraft-shortcut="Ctrl C">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.05546 2.05546C9.57118 1.53973 10.2707 1.25 11 1.25H20C20.7293 1.25 21.4288 1.53973 21.9445 2.05546C22.4603 2.57118 22.75 3.27065 22.75 4V13C22.75 13.7293 22.4603 14.4288 21.9445 14.9445C21.4288 15.4603 20.7293 15.75 20 15.75H19C18.5858 15.75 18.25 15.4142 18.25 15C18.25 14.5858 18.5858 14.25 19 14.25H20C20.3315 14.25 20.6495 14.1183 20.8839 13.8839C21.1183 13.6495 21.25 13.3315 21.25 13V4C21.25 3.66848 21.1183 3.35054 20.8839 3.11612C20.6495 2.8817 20.3315 2.75 20 2.75H11C10.6685 2.75 10.3505 2.8817 10.1161 3.11612C9.8817 3.35054 9.75 3.66848 9.75 4V5C9.75 5.41421 9.41421 5.75 9 5.75C8.58579 5.75 8.25 5.41421 8.25 5V4C8.25 3.27065 8.53973 2.57118 9.05546 2.05546ZM1.25 11C1.25 9.48122 2.48122 8.25 4 8.25H13C14.5188 8.25 15.75 9.48122 15.75 11V20C15.75 21.5188 14.5188 22.75 13 22.75H4C2.48122 22.75 1.25 21.5188 1.25 20V11ZM4 9.75C3.30964 9.75 2.75 10.3096 2.75 11V20C2.75 20.6904 3.30964 21.25 4 21.25H13C13.6904 21.25 14.25 20.6904 14.25 20V11C14.25 10.3096 13.6904 9.75 13 9.75H4Z"></path>
+                </svg>
+                &nbsp; Copy
+            </button>
+            <button id="ctx-menu-btn-paste" data-drrcraft-shortcut="Ctrl V">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: middle;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2.75C8.86193 2.75 8.75 2.86193 8.75 3V5C8.75 5.13807 8.86193 5.25 9 5.25H15C15.1381 5.25 15.25 5.13807 15.25 5V3C15.25 2.86193 15.1381 2.75 15 2.75H9ZM16.75 3.25V3C16.75 2.0335 15.9665 1.25 15 1.25H9C8.0335 1.25 7.25 2.0335 7.25 3V3.25H6C5.27065 3.25 4.57118 3.53973 4.05546 4.05546C3.53973 4.57118 3.25 5.27065 3.25 6V20C3.25 20.7293 3.53973 21.4288 4.05546 21.9445C4.57118 22.4603 5.27065 22.75 6 22.75H18C18.7293 22.75 19.4288 22.4603 19.9445 21.9445C20.4603 21.4288 20.75 20.7293 20.75 20V6C20.75 5.27065 20.4603 4.57118 19.9445 4.05546C19.4288 3.53973 18.7293 3.25 18 3.25H16.75ZM16.75 4.75V5C16.75 5.9665 15.9665 6.75 15 6.75H9C8.0335 6.75 7.25 5.9665 7.25 5V4.75H6C5.66848 4.75 5.35054 4.8817 5.11612 5.11612C4.8817 5.35054 4.75 5.66848 4.75 6V20C4.75 20.3315 4.8817 20.6495 5.11612 20.8839C5.35054 21.1183 5.66848 21.25 6 21.25H18C18.3315 21.25 18.6495 21.1183 18.8839 20.8839C19.1183 20.6495 19.25 20.3315 19.25 20V6C19.25 5.66848 19.1183 5.35054 18.8839 5.11612C18.6495 4.8817 18.3315 4.75 18 4.75H16.75Z"></path>
+                </svg>
+                &nbsp; Paste
+            </button>
+        </div>
+        <dialog id="modal-release">
+            <h2 style="margin-top: 0;">How would you like to release your code?</h2>
+            <button id="deploy-to-aws">Deploy to AWS</button>
+            <p style="margin-top: 0.4375rem; margin-bottom: 0.9375rem;">Make a production version of your project so people can use it without getting interrupted by your changes, and deploy whenever you want.</p>
+            <button id="share">Share</button>
+            <p style="margin-top: 0.4375rem; margin-bottom: 0.9375rem;">Share your project with some friends.</p>
+            <button id="modal-release-close" aria-title="Close modal">Close</button>
+        </dialog>
+        <dialog id="modal-share">
+            <h2 style="margin-top: 0;">Share</h2>
+            <p style="margin-bottom: 0.9375rem;">Want to share your code with others? Use the below box!</p>
+            <div id="share-controls">
+                <input type="text" id="share-link" readonly="true" style="flex-grow: 1;" />
+                <button id="share-link-copy" aria-title="Copy link">Copy link</button>
+            </div>
+            <h3>Other options</h3>
+            <p style="margin-bottom: 0.9375rem;">If you need a way to share a program, but do not want to send a long link, here are some other options for you.<br/><strong style="color: #f50;">Note:</strong> If you click any buttons that contain "Export" or "Download" in their title, it will download a file to your computer, which will be about <span id="share-export-filesize">? bytes</span>.</p>
+            <button id="share-export-typescript" aria-title="Download as TypeScript">Export / Download as TypeScript</button>
+            <button id="share-export-javascript" aria-title="Download as JavaScript">Export / Download as JavaScript</button>
+            <button id="share-export-plain-text" aria-title="Download as Plain Text">Export / Download as Plain Text</button>
+            <br/>
+            <button id="modal-share-close" aria-title="Close modal" style="margin-top: 0.9375rem;">Close</button>
+        </dialog>
+        <dialog id="modal-save">
+            <h2 style="margin-top: 0;">Save Code to Programs</h2>
+            <p style="margin-bottom: 0.9375rem;">Type the name of the program below, and it will save automatically.</p>
+            <div id="save-controls">
+                <input type="text" id="save-name" style="flex-grow: 1;" />
+                <button id="save-to-programs" aria-title="Save code">Save code</button>
+            </div>
+            <button id="modal-save-close" aria-title="Close modal" style="margin-top: 0.9375rem;">Close</button>
+        </dialog>
+        <dialog id="modal-history">
+            <h2 style="margin-top: 0;">Session History</h2>
+            <div id="modal-history-view"></div>
+            <div id="history-controls">
+                <button id="history-play-pause">Play</button>
+                <input type="range" id="history-time" min="0" max="0" step="0.1" style="flex-grow: 1;" />
+            </div>
+            <p style="margin-top: 0.4375rem; margin-bottom: 0.625rem;">Currently at <span id="current-time"></span></p>
+            <button id="revert-code">Revert to 0</button>
+            <button id="modal-history-close">Close</button>
+        </dialog>
+        <dialog id="modal-database">
+            <h2 style="margin-top: 0;">DrRcraft Database</h2>
+            <h3 id="database-usage-header" style="margin-bottom: 0;">No database connected</h3>
+            <p id="database-usage-label" style="margin-top: 0.25rem; margin-bottom: 0.9375rem;"></p>
+            <div id="database-usage">
+                <img id="database-smoke" src="smoke.gif" draggable="false" />
+                <div id="database-usage-amount" style="width: 0%;"></div>
+            </div>
+            <h3>About</h3>
+            <p style="margin-bottom: 0.9375rem;">The DrRcraft database is a key-value store that is very easy to use. Get started with the below import:</p>
+            <pre style="margin-bottom: 0;"><code class="language-javascript"><span class="tok-keyword">import</span> <span class="tok-variableName tok-definition">database</span> <span class="tok-keyword">from</span> <span class="tok-string">"@drrman/database"</span>;</code></pre>
+            <p style="margin-top: 0.9375rem;">After being imported, the database object has a lot of built-in functions that you can use.</p>
+            <details>
+                <summary>Show some example code</summary>
+                <pre style="margin-bottom: 0;"><code class="language-javascript"><span class="tok-keyword">import</span>&nbsp;<span class="tok-variableName">database</span>&nbsp;<span class="tok-keyword">from</span>&nbsp;<span class="tok-string">"@drrman/database"</span>;
+
+<span class="tok-variableName">database</span><span class="tok-operator">.</span><span class="tok-function">get</span>(<span class="tok-string">"visits"</span>)<span class="tok-operator">.</span><span class="tok-function">then</span>(<span class="tok-variableName">visits</span> =&gt; {
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-keyword">if</span>&nbsp;(<span class="tok-operator">!</span><span class="tok-variableName">visits</span>) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-variableName">database</span><span class="tok-operator">.</span><span class="tok-function">set</span>(<span class="tok-string">"visits"</span>,&nbsp;<span class="tok-number">0</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-variableName">visits</span>&nbsp;<span class="tok-operator">=</span>&nbsp;<span class="tok-number">0</span>;
+    }
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-variableName">database</span><span class="tok-operator">.</span><span class="tok-function">set</span>(<span class="tok-string">"visits"</span>,&nbsp;<span class="tok-variableName">visits</span>&nbsp;<span class="tok-operator">+</span>&nbsp;<span class="tok-number">1</span>);
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-variableName">console</span><span class="tok-operator">.</span><span class="tok-function">log</span>(<span class="tok-string">`You've&nbsp;visited&nbsp;this&nbsp;page&nbsp;</span>${<span class="tok-variableName">visits</span>}<span class="tok-string">&nbsp;times!`</span>);
+});
+</code></pre>
+            </details>
+            <h3>Modifying the Database</h3>
+            <dl>
+                <dt>
+                    <code class="language-javascript">database<span class="tok-operator">.</span><span class="tok-function">clear</span>()</code>
+                </dt>
+                <dd>
+                    <p>Get rid of all the items in the database.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">database<span class="tok-operator">.</span><span class="tok-function">set</span>(key: <span class="tok-typeName">string</span>, value: <span class="tok-typeName">DrRcraftValidDatabaseItem</span>)</code>
+                </dt>
+                <dd>
+                    <p>Set a specified key in the database to a specified value.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">database<span class="tok-operator">.</span><span class="tok-function">delete</span>(key: <span class="tok-typeName">string</span>)</code>
+                </dt>
+                <dd>
+                    <p>Delete a specified key in the database.</p>
+                </dd>
+            </dl>
+            <h3>Fetching from the Database</h3>
+            <dl>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-propertyName">isConnected</span>:
+                        <span class="tok-typeName">boolean</span>
+                    </code>
+                </dt>
+                <dd>
+                    <p>Get if the database is currently connected to the program.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-propertyName">keys</span>:
+                        <span class="tok-keyword">readonly</span> <span class="tok-typeName">string</span>[]
+                    </code>
+                </dt>
+                <dd>
+                    <p>Get all the keys in the database.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-propertyName">values</span>:
+                        <span class="tok-keyword">readonly</span> <span class="tok-typeName">DrRcraftValidDatabaseItem</span>[]
+                    </code>
+                </dt>
+                <dd>
+                    <p>Get the values of all the keys in the database.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-propertyName">items</span>:
+                        <span class="tok-keyword">readonly</span> {}
+                    </code>
+                </dt>
+                <dd>
+                    <p>Get all the items in the database.</p>
+                </dd>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-function">get</span>(key: <span class="tok-typeName">string</span>)
+                        →
+                        <span class="tok-typeName">Promise</span>&lt;<span class="tok-typeName">DrRcraftValidDatabaseItem</span>&gt;
+                    </code>
+                </dt>
+                <dd>
+                    <p>Get the value of a specified key in the database.</p>
+                </dd>
+            </dl>
+            <h3>Data Type Reference</h3>
+            <dl>
+                <dt>
+                    <code class="language-javascript">
+                        <span class="tok-typeName">DrRcraftValidDatabaseItem</span>:
+                        <span class="tok-typeName">string</span> |
+                        <span class="tok-typeName">number</span> |
+                        <span class="tok-typeName">boolean</span> |
+                        <span class="tok-typeName">null</span> |
+                        <span class="tok-typeName">DrRcraftValidDatabaseItem</span>[] |
+                        {}
+                    </code>
+                </dt>
+                <dd>
+                    <p>Any data type that can be safely saved in the database.</p>
+                </dd>
+            </dl>
+            <h3>Deprecated Database Methods</h3>
+            <p>
+                <strong style="color: #f50;">Note:</strong>
+                Because these methods are deprecated, you are not advised to use them. Instead, please look at the alternatives mentioned in some of the descriptions.
+            </p>
+            <dl>
+                <dt>
+                    <code class="language-javascript">
+                        database<span class="tok-operator">.</span><span class="tok-function">prefix</span>(prefix: <span class="tok-typeName">string</span>)
+                        →
+                        <span class="tok-keyword">readonly</span> <span class="tok-typeName">string</span>[]
+                    </code>
+                </dt>
+                <dd>
+                    <p>Used to get all the keys in the database with a specified prefix. Please use <code>database<span class="tok-operator">.</span><span class="tok-propertyName">keys</span><span class="tok-operator">.</span><span class="tok-function">filter</span>(key => key<span class="tok-operator">.</span><span class="tok-function">startsWith</span>(prefix: <span class="tok-typeName">string</span>))</code> instead.</p>
+                </dd>
+            </dl>
+            <button id="modal-database-close" aria-title="Close modal">Close</button>
+        </dialog>
+        <dialog id="modal-invalid-dv">
+            <h2 style="margin-top: 0;">Invalid Data Version</h2>
+            <p style="margin-bottom: 0.9375rem;">This link, which most likely came from the 'Share' tool, was created specifically in <span id="data-version"></span>, while you are on version 3.0.0. If you received this link from someone, please ask them to send you a more up-to-date link! If that is not possible, you can try loading the code anyway, or just use the default template.</p>
+            <button id="invalid-dv-load-anyway" aria-title="Try to load code anyway">Try to Load Anyway</button>
+            <button id="invalid-dv-load-default" aria-title="Use default template">Use Default Code</button>
+        </dialog>
+        <dialog id="modal-program-unavailable">
+            <h2 style="margin-top: 0;">Program is Currently Inaccessible</h2>
+            <p style="margin-bottom: 0.9375rem;">This program, at the moment, cannot be accessed. If you created this program and believe you should be able to access it, please <a href="https://github.com/DrRman25/drrman25.github.io/issues">report an issue on GitHub</a>.</p>
+            <p style="margin-bottom: 0.9375rem;">This issue may be resolved by loading this program in an older version of the Code Editor, or verifying the program via the raw JSON editor in the Programs page. For more information, please read <a href="../../help/😖-fixing-program-is-currently-inaccessible/">this article</a>.</p>
+            <button id="program-unavailable-refresh">Refresh</button>
+            <button id="program-unavailable-leave">Leave</button>
+        </dialog>
+        <iframe id="completion-source-frame"></iframe>
+        <div id="loading-screen">
+            <img src="../../style/loader-logo.svg" draggable="false" />
+        </div>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

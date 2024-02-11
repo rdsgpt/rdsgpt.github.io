@@ -1,0 +1,233 @@
+#surface {
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
+    height: 30rem;
+    position: relative;
+    border: 0.0625rem solid #666;
+}
+
+#output iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#editor .cm-editor {
+    height: 100%;
+    max-height: none;
+    border: none;
+}
+
+#editor .cm-scroller {
+    overflow: auto;
+    line-height: 1.5;
+}
+
+#editor .cm-content {
+    white-space: pre-wrap;
+}
+
+#editor, #output {
+    flex-basis: 50%;
+    width: 50%;
+}
+
+#output {
+    background: white;
+    color: black;
+}
+
+#editor {
+    border-right: 0.0625rem solid #666;
+}
+
+#catch-the-code-play {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 0.5rem;
+    border-radius: 0;
+    border-top-right-radius: 0.5rem;
+    font: inherit;
+    background-color: inherit;
+    background-image: linear-gradient(#8882, #8882);
+    color: inherit;
+    border: 0;
+    cursor: pointer;
+}
+
+#catch-the-code-play:hover {
+    background-image: linear-gradient(#8888, #8888);
+}
+
+#catch-the-code-play h4 {
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+}
+
+#catch-the-code-play h4 svg {
+    margin-right: 0.125em;
+}
+
+#catch-the-code-play p {
+    margin: 0;
+    display: none;
+}
+
+@media screen and (min-width: 1200px) {
+    #catch-the-code-play h4 svg {
+        display: none;
+    }
+
+    #catch-the-code-play p {
+        margin-top: 0.25rem;
+        display: block;
+    }
+}
+
+.code {
+    position: fixed;
+    font-family: "DrRcraft Hack", monospace;
+    font-size: 0.875rem;
+    background-color: var(--background-color);
+    white-space: pre-wrap;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#create-first-program, #create-first-program .holo-content {
+    border-radius: 0.75rem;
+    color: white;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    font: inherit;
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+#create-first-program .holo-content {
+    border: 0.25rem solid #0079f2;
+    background-color: #1c2333;
+    padding: 1rem;
+    width: calc(100% - 2.5rem);
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+#create-first-program .holo-content:active {
+    background-color: #2b3245;
+    border-color: #e52222;
+    box-shadow: 0 0 1rem #e52222;
+}
+
+.holo-image-wrapper {
+    pointer-events: auto;
+}
+
+.holo-attribute-wrapper {
+    --m-x: 50%;
+    --m-y: 50%;
+    --r-x: 0deg;
+    --r-y: 0deg;
+    --bg-x: 50%;
+    --bg-y: 50%;
+    --duration: 300ms;
+    --foil-size: 360px;
+    --opacity: 0;
+    --radius: 0;
+    position: relative;
+    isolation: isolate;
+    contain: layout style;
+    perspective: 1000px;
+    width: 100%;
+}
+
+.holo-content-wrapper {
+    display: grid;
+    pointer-events: none;
+    width: 100%;
+    will-change: transform;
+    transform-origin: center center;
+    transition-property: transform;
+    transition-duration: var(--duration);
+    transform: rotateY(calc(var(--r-x) * 5)) rotateX(calc(var(--r-y) * 5));
+    overflow: hidden;
+}
+
+.holo-content-wrapper > * {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-area: 1 / 1 / auto / auto;
+}
+
+.holo-spotlight {
+    mix-blend-mode: soft-light;
+    opacity: var(--opacity);
+    will-change: background;
+    transition-property: opacity, background;
+    transition-duration: var(--duration);
+    background: radial-gradient(farthest-corner circle at var(--m-x) var(--m-y), rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0.35) 20%, rgba(255, 255, 255, 0) 90%);
+}
+
+.holo {
+    mix-blend-mode: color-dodge;
+    opacity: var(--opacity);
+    will-change: background;
+    transition-property: opacity;
+    transition-duration: var(--duration);
+    clip-path: inset(0 0 1px 0 round var(--radius));
+    --step: 5%;
+    --pattern: url("./foil.png") center / var(--foil-size);
+    --rainbow: repeating-linear-gradient(
+        0,
+        rgb(255, 122, 117) calc(var(--step) * 1),
+        rgba(255, 237, 95, 1) calc(var(--step) * 2),
+        rgba(168, 255, 95, 1) calc(var(--step) * 3),
+        rgba(131, 255, 247, 1) calc(var(--step) * 4),
+        rgba(120, 148, 255, 1) calc(var(--step) * 5),
+        rgb(216, 117, 255) calc(var(--step) * 6),
+        rgb(255, 119, 115) calc(var(--step) * 7)
+    ) 0% var(--bg-y) / 200% 700%;
+    --diagonal: repeating-linear-gradient(
+        128deg,
+        #000 0%,
+        hsl(180, 10%, 100%) 3.8%,
+        hsl(180, 10%, 100%) 4.5%,
+        hsl(180, 10%, 100%) 5.2%,
+        #000 10%, #000 12%
+    ) var(--bg-x) var(--bg-y) / 300%;
+    --shade: radial-gradient( 
+        farthest-corner circle at var(--m-x) var(--m-y),
+        rgba(255, 255, 255, 0.1) 12%,
+        rgba(255, 255, 255, 0.15) 20%,
+        rgba(255, 255, 255, 0.25) 120%
+    ) var(--bg-x) var(--bg-y) / 300%;
+    background-blend-mode: exclusion, hue, hard-light;
+    background: var(--pattern), var(--rainbow), var(--diagonal), var(--shade);
+    filter: brightness(0.6) contrast(2) saturate(1);
+}
+
+.holo::after {
+    content: "";
+    grid-area: inherit;
+    background: inherit;
+    mix-blend-mode: exclusion;
+    background-size: var(--foil-size), 200% 400%, 800%,200%;
+    background-position: center, 0% var(--bg-y), calc(var(--bg-x) * -1) calc(var(--bg-y) * -1), var(--bg-x) var(--bg-y);
+    background-blend-mode: soft-light, exclusion;
+}
+
+div.holo-content {
+    background-color: inherit;
+    width: 100%;
+}
+
+div.holo-shadow {
+    border-radius: 24px;
+    box-shadow: 0 0 1200px rgba(0, 0, 0, 0.1);
+}

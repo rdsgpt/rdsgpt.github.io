@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Editor: Deploying to AWS</title>
+        <link rel="stylesheet" href="../../style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="../../style/logo-small.svg" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="logo" href="../../">Code Editor</a>
+                <div class="navlinks">
+                    <a href="../../about/">About</a>
+                    <a href="../" class="active">Help</a>
+                    <a href="../../create/">Create</a>
+                    <a href="../../programs/">Programs</a>
+                    <a href="../../preferences/">Preferences</a>
+                    <a href="../../2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <nav id="toc">
+            <ul>
+                <li>
+                    <a href="#html-css-js">HTML, CSS, JS</a>
+                </li>
+                <li>
+                    <a href="#javascript-python">Plain JavaScript and Python</a>
+                </li>
+            </ul>
+            <div id="searchbox">
+                <input aria-label="Search" placeholder="Search..." />
+                <ul class="results" aria-live="polite"></ul>
+            </div>
+        </nav>
+        <article>
+            <h1>Deploying to AWS</h1>
+            <p><strong style="color: #f50;">Note:</strong> Depending on how much of your free tier you went through this month, you may have to pay for deployments you make. For more information, please take a look at <a href="https://aws.amazon.com/pricing/">the AWS pricing page</a>.</p>
+            <img src="1.png" alt="DrRcraft partners with AWS to advance hosting for production" />
+            <p>This page provides a tutorial on deploying your program in the DrRcraft Code Editor to production using AWS. If something is missing or incorrect, please <a href="https://github.com/DrRman25/drrman25.github.io/compare">create a pull request on GitHub</a> so it can be fixed as soon as possible.</p>
+            <p>So, first, you need to find a program to deploy. If it is an HTML, CSS, and JS program, just continue right below this paragraph. If it is a Plain JavaScript or Python program, though, scroll down to the "Plain JavaScript and Python" section. With all of that out of the way, let's get deploying!</p>
+            <h2 id="html-css-js">HTML, CSS, JS</h2>
+            <p>To deploy an HTML, CSS, and JS program to AWS, first go to the programs page and select the program you want to deploy. Then, click on "Release", "Share", and finally, "Export / Download as HTML". You should now see a file downloading, titled <code>index.html</code> or something similar. This is what you are going to deploy to AWS. Next, open the location of the HTML file you just downloaded, and copy the path, as it will be used later.</p>
+            <img src="2.png" alt="Steps 1 and 2 of deploying to AWS" />
+            <p>After doing that, <a href="https://console.aws.amazon.com/console/home">log in to your AWS account</a>, or <a href="https://portal.aws.amazon.com/billing/signup">sign up for an AWS Free Tier account</a> if you do not have one. Once you've reached a page titled "AWS Management Console", go to the search bar and type in "amplify". You should see a service called "AWS Amplify" near the top of the search results.</p>
+            <img src="3.png" alt="AWS Amplify shows up in the search results" />
+            <p>Click on it and scroll to the very bottom of the page it redirects you to. It should look like this:</p>
+            <img src="4.png" alt="Bottom of the AWS Amplify page" />
+            <p>Click the "Get Started" button under "Amplify Hosting: Host your web app", and select "Deploy without Git provider". Before you proceed with AWS, though, you need to compress the HTML file you downloaded to a <code>.zip</code> file. In most operating systems, there is a way to easily do this.</p>
+            <img src="5.png" alt="Compress your HTML file to a zipped folder" />
+            <p>Go back to AWS, and select "Drag and drop" as the method. Simply drag your <code>.zip</code> file in there, and click "Save and deploy".</p>
+            <img src="6.png" alt="Upload your zipped folder and save and deploy" />
+            <p>After a few minutes, you should see a page that looks like this. If you do, then congratulations! You have successfully deployed your HTML, CSS, and JS project to AWS! Open the domain it gives you to see your production website.</p>
+            <img src="7.png" alt="A successful AWS deployment" />
+        </article>
+        <script defer="true" src="script.js"></script>
+    </body>
+</html>

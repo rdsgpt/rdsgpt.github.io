@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Editor</title>
+        <link rel="stylesheet" href="style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="style/logo-small.svg" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="logo" href="./">Code Editor</a>
+                <div class="navlinks">
+                    <a href="about/">About</a>
+                    <a href="help/">Help</a>
+                    <a href="create/">Create</a>
+                    <a href="programs/">Programs</a>
+                    <a href="preferences/">Preferences</a>
+                    <a href="2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <h1>DrRcraft Code Editor</h1>
+            <p>The DrRcraft Code Editor is a professional online IDE that has the tools you need. With this editor, you can make a website, a game, a useful tool, a messaging app, anything you can dream of.</p>
+            <a id="create-first-program" href="create/">
+                <main>
+                    <div class="holo-shadow">
+                        <div class="holo-attribute-wrapper" style="--opacity: 0; --m-x: 50%; --m-y: 50%; --bg-x: 50%; --bg-y: 50%; --r-x: 0deg; --r-y: 0deg; --duration: 300ms;">
+                            <div class="holo-content-wrapper" style="border-radius: 0.75rem;">
+                                <div class="holo-image-wrapper">
+                                    <div class="holo-content">Create Your First Program</div>
+                                </div>
+                                <div class="holo-spotlight"></div>
+                                <div class="holo"></div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </a>
+            <p>
+                This is a simplified version of the editor's interface.<br/>
+                <small>For the full experience, <a href="create/">create a program</a> and select "HTML, CSS, JS" as the language.</small>
+            </p>
+            <div id="surface">
+                <div id="editor"></div>
+                <div id="output"></div>
+            </div>
+            <h2 class="hr" id="languages">Languages</h2>
+            <ul class="grid-list-5">
+                <li>
+                    <a href="languages/html-css-js/" class="blocklink">
+                        <strong>HTML, CSS, JS</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/javascript/" class="blocklink">
+                        <strong>Plain JavaScript</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/python/" class="blocklink">
+                        <strong>Python</strong>
+                    </a>
+                </li>
+                <li class="explorer-language" style="display: none;">
+                    <a href="languages/markdown/" class="blocklink">
+                        <strong class="explorer-hoverable">Markdown (explorer)</strong>
+                    </a>
+                </li>
+                <li class="explorer-language" style="display: none;">
+                    <a href="languages/sql/" class="blocklink">
+                        <strong class="explorer-hoverable">SQL (explorer)</strong>
+                    </a>
+                </li>
+            </ul>
+            <h2 class="hr" id="features">Features</h2>
+            <ul class="grid-list-3">
+                <li>
+                    <h3>Mobile Support</h3>
+                    <p>Works well for phone and tablet users.</p>
+                </li>
+                <li>
+                    <h3>Line Numbers</h3>
+                    <p>Shows gutters on the left side of the editor, with line numbers and other information.</p>
+                </li>
+                <li>
+                    <h3>Autocompletion</h3>
+                    <p>Gives the user completion hints to avoid typing too much.</p>
+                </li>
+                <li>
+                    <h3>Search/Replace</h3>
+                    <p>Editor and RegExp search, and replace functions.</p>
+                </li>
+                <li>
+                    <h3>Performance</h3>
+                    <p>Responsive even with huge documents.</p>
+                </li>
+                <li>
+                    <h3>Syntax Highlighting</h3>
+                    <p>Clear highlighting for users to understand the code better.</p>
+                </li>
+                <li>
+                    <h3>Code Folding</h3>
+                    <p>Collapse content to make the code easier to read.</p>
+                </li>
+                <li>
+                    <h3>Bracket and Tag Closing</h3>
+                    <p>Automatically insert matching tags or brackets when typing.</p>
+                </li>
+                <li>
+                    <h3>CSS Color Picker</h3>
+                    <p>Pick a color, and automatically set its exact hexadecimal code.</p>
+                </li>
+                <li>
+                    <h3>Emmet Abbreviations</h3>
+                    <p>Write CSS-like Emmet abbreviations in the HTML, and expand it into markup.</p>
+                </li>
+                <li>
+                    <h3>Image Placeholders</h3>
+                    <p>Drag images from a file viewer inline, and view them easily.</p>
+                </li>
+                <li>
+                    <h3>Indentation Markers</h3>
+                    <p>View exactly how much a line of code is indented.</p>
+                </li>
+                <li>
+                    <h3>Interactions</h3>
+                    <p>Interact with values and change them by clicking and dragging.</p>
+                </li>
+                <li>
+                    <h3>Rectangular Selections</h3>
+                    <p>Hold Alt and drag to create a rectangular selection in your code.</p>
+                </li>
+                <li>
+                    <h3>Sharing</h3>
+                    <p>Get a permanent link to share your code with others.</p>
+                </li>
+                <li>
+                    <h3>Running in Fullscreen</h3>
+                    <p>Test your apps and games in a fully immersive experience.</p>
+                </li>
+                <li>
+                    <h3>History</h3>
+                    <p>Revert accidental changes by going back in time.</p>
+                </li>
+                <li>
+                    <h3>Database</h3>
+                    <p>Store your items in a place which you can access at any time.</p>
+                </li>
+                <li>
+                    <h3>AWS Deployments</h3>
+                    <p>Create a production build of your project so people can use it without getting interrupted by frequent changes.</p>
+                </li>
+            </ul>
+        </article>
+        <button id="catch-the-code-play">
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -0.125em;" aria-hidden="true">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5928 10.9105C21.4424 11.3884 21.4424 12.6116 20.5928 13.0895L6.11267 21.2345C5.27942 21.7033 4.24984 21.1011 4.24984 20.1451L4.24985 3.85492C4.24985 2.89889 5.27942 2.29675 6.11267 2.76545L20.5928 10.9105ZM19.47 12L5.74985 4.28238L5.74985 19.7176L19.47 12Z"></path>
+                </svg>
+                Catch the Code
+            </h4>
+            <p>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -0.25em;" aria-hidden="true">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5928 10.9105C21.4424 11.3884 21.4424 12.6116 20.5928 13.0895L6.11267 21.2345C5.27942 21.7033 4.24984 21.1011 4.24984 20.1451L4.24985 3.85492C4.24985 2.89889 5.27942 2.29675 6.11267 2.76545L20.5928 10.9105ZM19.47 12L5.74985 4.28238L5.74985 19.7176L19.47 12Z"></path>
+                </svg>
+                Play
+            </p>
+        </button>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

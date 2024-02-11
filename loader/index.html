@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Editor</title>
+        <link rel="stylesheet" href="../style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="../style/logo-small.svg" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="logo" href="../">Code Editor</a>
+                <div class="navlinks">
+                    <a href="../about/">About</a>
+                    <a href="../help/">Help</a>
+                    <a href="../create/">Create</a>
+                    <a href="../programs/">Programs</a>
+                    <a href="../preferences/">Preferences</a>
+                    <a href="../2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <h1>DrRcraft Code Editor</h1>
+            <p>The DrRcraft Code Editor is a professional online IDE that has the tools you need. With this editor, you can make a website, a game, a useful tool, a messaging app, anything you can dream of.</p>
+            <p>
+                This is a simplified version of the editor's interface.<br/>
+                <small>For the full experience, <a href="create/">create a program</a> and select "HTML, CSS, JS" as the language.</small>
+            </p>
+            <div id="surface">
+                <div id="editor"></div>
+                <div id="output"></div>
+            </div>
+            <h2 class="hr" id="languages">Languages</h2>
+            <ul class="grid-list-5">
+                <li>
+                    <a href="languages/html-css-js/" class="blocklink">
+                        <strong>CSS</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/html-css-js/" class="blocklink">
+                        <strong>HTML</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/javascript/" class="blocklink">
+                        <strong>JavaScript</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/markdown/" class="blocklink">
+                        <strong>Markdown (experimental)</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="languages/python/" class="blocklink">
+                        <strong>Python</strong>
+                    </a>
+                </li>
+            </ul>
+            <h2 class="hr" id="features">Features</h2>
+            <ul class="grid-list-3">
+                <li>
+                    <h3>Mobile Support</h3>
+                    <p>Works well for phone and tablet users.</p>
+                </li>
+                <li>
+                    <h3>Line Numbers</h3>
+                    <p>Shows gutters on the left side of the editor, with line numbers and other information.</p>
+                </li>
+                <li>
+                    <h3>Autocompletion</h3>
+                    <p>Gives the user completion hints to avoid typing too much.</p>
+                </li>
+                <li>
+                    <h3>Search/Replace</h3>
+                    <p>Editor and RegExp search, and replace functions.</p>
+                </li>
+                <li>
+                    <h3>Performance</h3>
+                    <p>Responsive even with huge documents.</p>
+                </li>
+                <li>
+                    <h3>Syntax Highlighting</h3>
+                    <p>Clear highlighting for users to understand the code better.</p>
+                </li>
+                <li>
+                    <h3>Code Folding</h3>
+                    <p>Collapse content to make the code easier to read.</p>
+                </li>
+                <li>
+                    <h3>Bracket and Tag Closing</h3>
+                    <p>Automatically insert matching tags or brackets when typing.</p>
+                </li>
+                <li>
+                    <h3>CSS Color Picker</h3>
+                    <p>Pick a color, and automatically set its exact hexadecimal code.</p>
+                </li>
+                <li>
+                    <h3>Emmet Abbreviations</h3>
+                    <p>Write CSS-like Emmet abbreviations in the HTML, and expand it into markup.</p>
+                </li>
+                <li>
+                    <h3>Abbreviation Tracker</h3>
+                    <p>Write Emmet abbreviations in the HTML, and expand it into actual code.</p>
+                </li>
+                <li>
+                    <h3>Image Placeholders</h3>
+                    <p>Drag images from a file viewer inline, and view them easily.</p>
+                </li>
+                <li>
+                    <h3>Indentation Markers</h3>
+                    <p>View exactly how much a line of code is indented.</p>
+                </li>
+                <li>
+                    <h3>Interactions</h3>
+                    <p>Interact with values and change them by clicking and dragging.</p>
+                </li>
+                <li>
+                    <h3>Rectangular Selections</h3>
+                    <p>Hold Alt and drag to create a rectangular selection in your code.</p>
+                </li>
+                <li>
+                    <h3>Sharing</h3>
+                    <p>Get a permanent link to share your code with others.</p>
+                </li>
+                <li>
+                    <h3>Running in Fullscreen</h3>
+                    <p>Test your apps and games in a fully immersive experience.</p>
+                </li>
+                <li>
+                    <h3>History</h3>
+                    <p>Revert accidental changes by going back in time.</p>
+                </li>
+            </ul>
+        </article>
+        <div id="loading-screen">
+            <img src="../style/loader-logo.svg" draggable="false" />
+        </div>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

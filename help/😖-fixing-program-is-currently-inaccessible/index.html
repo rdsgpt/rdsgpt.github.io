@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Editor: Fixing the "Program is Currently Inaccessible" Error</title>
+        <link rel="stylesheet" href="../../style/site.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="../../style/logo-small.svg" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a class="logo" href="../../">Code Editor</a>
+                <div class="navlinks">
+                    <a href="../../about/">About</a>
+                    <a href="../" class="active">Help</a>
+                    <a href="../../create/">Create</a>
+                    <a href="../../programs/">Programs</a>
+                    <a href="../../preferences/">Preferences</a>
+                    <a href="../../2/">Version 2</a>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <h1>Fixing the "Program is Currently Inaccessible" Error</h1>
+            <p>If you have a program that was made in a beta version of the DrRcraft Code Editor, and you try and open it now, you might see this infuriating message that you're not sure how to fix:</p>
+            <img src="1.png" alt="The 'Program is Currently Inaccessible' error" />
+            <p>This can be incredibly frustrating, especially when you see this message when you open a project you've worked on for a long time. Hopefully, after reading this article, you can fix this error, and get right back to working on your masterpiece.</p>
+            <h2>Temporary Fix: Use an Older Version of the Code Editor</h2>
+            <p>Usually, the reason why this error occurs is because now, all programs need a verified property in their raw JSON data. However, older versions of the Code Editor do not require this verified property, and thus, can usually load and run the exact same programs.</p>
+            <p style="margin-bottom: 0.4375rem;">Going back to an older version of the Code Editor is as simple as adding "-old" to the end of the language name in the URL. For example, replace:</p>
+            <code>https://drrman25.github.io/code-editor/languages/javascript/</code>
+            <p style="margin-top: 0.4375rem; margin-bottom: 0.4375rem;">with:</p>
+            <code style="display: block; margin-bottom: 0.4375rem;">https://drrman25.github.io/code-editor/languages/javascript<mark>-old</mark>/</code>
+            <img src="2.png" alt="Going to an older version of the Code Editor" />
+            <p>For most languages, this will work just fine, and you can access, run, save, and share your programs as normal. However, some newly-added languages, hence the name, do not have an older version for you to go back to. If this is the case, or if going to an older version every single time you open up a program is too tedious for you, move on to the next fix.</p>
+            <h2>Permanent Fix: Edit the Raw JSON Data of the Program</h2>
+            <p>This might seem like a very scary process because of the title, but it is actually pretty easy, thanks to the Code Editor's built-in raw JSON editor.</p>
+            <p>First, go to the <a href="../../programs/">Programs</a> page, and find the "Run Commands" section. Once you've found it, click on the dropdown, and select <code>EDIT</code>. In the text box next to that, you want to type in the name of your program.</p>
+            <img src="3.png" alt="Writing the arguments for the run command" />
+            <p>Once finished, click on the "Run command" button. You should see something like this:</p>
+            <img src="4.png" alt="The raw JSON data of a program" />
+            <p style="margin-bottom: 0.4375rem;">If you see that, then create a new line anywhere between the two curly brackets, and in that new line, type:</p>
+            <code><span class="tok-propertyName">"verified"</span>: <span class="tok-bool">true</span></code>
+            <p style="margin-top: 0.4375rem;">Once you're done, your JSON should look like this:</p>
+            <img src="5.png" alt="The edited JSON data of a program" />
+            <p>Click "Save", and then "Close", and congratulations! You are finished, and when you refresh the page and click on the program, it should immediately open with no errors!</p>
+        </article>
+        <script defer="true" src="script.js"></script>
+    </body>
+</html>
